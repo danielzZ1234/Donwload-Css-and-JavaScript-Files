@@ -35,6 +35,9 @@ class website():
                 return 0
             if f[css : css+2] =="//":
                 return 0
+            if f[css] =="}":
+               return 0
+
             elif f[css] == "=":
                 r = cssName - css
                 r = r+css
@@ -45,6 +48,7 @@ class website():
                         if f[r+g] == ">":
                             self.createCssFile(r)
                             return 0
+
             css = css - 1
     def createCssFile(self,r):
         cssName = []
@@ -63,6 +67,9 @@ class website():
                     if f[r1 : r1+4] == ".css":
                         self.createCssFoldr(cssName1)
                         return 0
+
+
+
             r =r-1
 
     def createCssFoldr(self,folder):
@@ -72,17 +79,27 @@ class website():
         while folderLn > 0:
             folderLn = folderLn -1
             if folder[folderLn]=="/":
-                foldery.append(folder[folderLn])
+             foldery.append(folder[folderLn])
             if folder[folderLn]==".":
-                foldery.append(folder[folderLn])
+             foldery.append(folder[folderLn])
+            if folder[folderLn]=="-":
+             foldery.append(folder[folderLn])
+            if folder[folderLn]=="_":
+             foldery.append(folder[folderLn])
+            if folder[folderLn]==",":
+             foldery.append(folder[folderLn])
+            if folder[folderLn] =="0" or folder[folderLn]=="1" or folder[folderLn]=="2" or folder[folderLn]=="3" or folder[folderLn]=="4" or folder[folderLn]=="5" or folder[folderLn]=="6" or folder[folderLn]=="8" or folder[folderLn] == "9":
+             foldery.append(folder[folderLn])
             if folder[folderLn].islower() != folder[folderLn].isupper():
                 foldery.append(folder[folderLn])
         for e in reversed(foldery):
             folder13.append(e)
             folder14 =''.join(folder13)
+        print(folder14)
         if "/" not in folder14:
             webContent = requests.get(self.website+"/"+folder14+"css")
             open(folder14+"css", 'wb').write(webContent.content)
+            return 0
         else:
             if folder14[0] =="/":
                 folder14 =''.join(folder14.split('/', 1))
@@ -92,6 +109,7 @@ class website():
             with open(folder14, "w") as f:
                 webContent = requests.get(self.website+"/"+folder14)
                 f.write(str(webContent.content))
+                return 0
     def javaScriptfiles(self):
         f = str(self.websiteContent)
         x = self.checkEqual1(0)
@@ -118,7 +136,7 @@ class website():
                 if f[r+1] == "j":
 
                     g = 0
-                    while g < 30:
+                    while g < 10:
                         g = g+1
                         if f[r+g] == ">":
                             self.createJavaFile(r)
@@ -140,10 +158,15 @@ class website():
                 cssName.append([f[r1]])
                 cssName1 = cssName1 + ''.join(cssName[z])
                 z = z+1
-                if f[r1 : r1+3] == ".js":
-                    self.createJavaFoldr(cssName1)
-                    return 0
+                if f[r1+1 : r1+3] == "js":
+                    if f[r1+3] == "o":
+                        return 0
+                    else:
+                        self.createJavaFoldr(cssName1)
+                        return 0
+
         r =r-1
+
     def createJavaFoldr(self,folder):
 
 
@@ -156,7 +179,13 @@ class website():
                 foldery.append(folder[folderLn])
             if folder[folderLn]==".":
                 foldery.append(folder[folderLn])
+            if folder[folderLn]=="-":
+                foldery.append(folder[folderLn])
             if folder[folderLn]=="_":
+                foldery.append(folder[folderLn])
+            if folder[folderLn]==",":
+                foldery.append(folder[folderLn])
+            if folder[folderLn] =="0" or folder[folderLn]=="1" or folder[folderLn]=="2" or folder[folderLn]=="3" or folder[folderLn]=="4" or folder[folderLn]=="5" or folder[folderLn]=="6" or folder[folderLn]=="8" or folder[folderLn] == "9":
                 foldery.append(folder[folderLn])
             if folder[folderLn].islower() != folder[folderLn].isupper():
                 foldery.append(folder[folderLn])
@@ -180,5 +209,3 @@ websiteName = "https://ynet.co.il"
 webContent = requests.get(websiteName)
 website = website(websiteName,webContent)
 website.createHtmlfile()
-website.createCssfiles()
-website.javaScriptfiles()
