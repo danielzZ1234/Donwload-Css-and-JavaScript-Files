@@ -158,7 +158,7 @@ class website():
                 cssName.append([f[r1]])
                 cssName1 = cssName1 + ''.join(cssName[z])
                 z = z+1
-                if f[r1+1 : r1+3] == "js":
+                if f[r1 : r1+3] == ".js":
                     if f[r1+3] == "o":
                         return 0
                     else:
@@ -206,7 +206,7 @@ class website():
                 f.write(str(webContent.content))
 
 #Dont put "/" in the end of the URL 
-websiteName = "https://ynet.co.il"
+websiteName = "https://www.bankhapoalim.co.il"
 webContent = requests.get(websiteName)
 website = website(websiteName,webContent)
 website.createHtmlfile()
