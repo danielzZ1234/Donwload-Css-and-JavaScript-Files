@@ -205,7 +205,8 @@ class website():
                 webContent = requests.get(self.website+"/"+folder14)
                 f.write(str(webContent.content))
 
-websiteName = "https://bankofamerica.com"
+#Dont put "/" in the end of the URL 
+websiteName = "https://ynet.co.il"
 webContent = requests.get(websiteName)
 website = website(websiteName,webContent)
 website.createHtmlfile()
