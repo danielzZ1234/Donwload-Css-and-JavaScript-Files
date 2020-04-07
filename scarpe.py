@@ -206,7 +206,7 @@ class website():
                 f.write(str(webContent.content))
 
 #Dont put "/" in the end of the URL 
-websiteName = "https://www.bankhapoalim.co.il"
+websiteName = "https://www.ynet.co.il"
 webContent = requests.get(websiteName)
 website = website(websiteName,webContent)
 website.createHtmlfile()
